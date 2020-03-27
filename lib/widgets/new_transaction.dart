@@ -18,14 +18,11 @@ class _NewTransactionState extends State<NewTransaction> {
     final enteredTitle = titleController.text;
     final enteredAmount = double.parse(amountController.text);
 
-  if (enteredTitle.isEmpty || enteredAmount <= 0) {
-    return;
-  }
+    if (enteredTitle.isEmpty || enteredAmount <= 0) {
+      return;
+    }
 
-    widget.addTx(
-      enteredTitle,
-      enteredAmount
-    );
+    widget.addTx(enteredTitle, enteredAmount);
 
     Navigator.of(context).pop();
   }
@@ -54,10 +51,24 @@ class _NewTransactionState extends State<NewTransaction> {
               onSubmitted: (_) => submitData(),
               // onChanged: (val) => amountInput = val,
             ),
-            FlatButton(
+            Container(
+              height: 70,
+              child: Row(
+                children: <Widget>[
+                  Text('No Date Chosen'),
+                  FlatButton(
+                    textColor: Theme.of(context).primaryColor,
+                    onPressed: () {},
+                    child: Text('Choose Date', style: TextStyle(fontWeight: FontWeight.bold),),
+                  )
+                ],
+              ),
+            ),
+            RaisedButton(
               child: Text('Add Transaction'),
-              textColor: Colors.grey,
-              onPressed:  submitData,
+              color: Theme.of(context).primaryColor,
+              textColor: Theme.of(context).textTheme.button.color,
+              onPressed: submitData,
             ),
           ],
         ),
